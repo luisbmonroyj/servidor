@@ -89,6 +89,13 @@ const server = http.createServer(
                 //al entregar una respuesta 404
                 serveFile(path.join(__dirname,'views','404.html'), 'text/html', res);
             }
+            /*las pruebas de esta rutina se hacen creando los archivos:
+            new-page.html
+            404.html
+            Se corre el servidor y se trata de llamar la pagina de "case 'old-page.html'"
+            para comprobar que va a la nueva pagina
+            con otra peticion se usa una direccion incorrecta para comprobar si carga 404.html
+            */
         }
     }
 );
