@@ -58,9 +58,8 @@ Estas dependencias descargaran unos archivos en la carpeta del proyecto (node_mo
     npm rm <package>
 
 ## Documentacion de los modulos 
-    [pagina ofical npm][npm]. 
 
-[npm]: www.npmjs.com 
+www.npmjs.com 
 
 
 
