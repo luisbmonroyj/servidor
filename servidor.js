@@ -1,9 +1,18 @@
-//1.48.41
 //dependencias nativas
 const fs = require ('fs');
 const path = require('path');
 const http = require('http');
 const fsPromises = require ('fs').promises;
+const EventEmitter = require ('events');
+//dependencias propias
+const logEvents = require ('./logEvents');
+
+//clase para la captacion de eventos
+class MyEmitter extends EventEmitter {};
+
+//inicializar objeto
+const myEmitter = new MyEmitter();
+myEmitter.on('log',(msg,fileName) => logEvents (msg, fileName));
 
 const PORT = process.env.PORT || 4500;
 
@@ -24,6 +33,8 @@ const serveFile =  async (filePath, contentType, response) => {
     } 
     catch (err) {
         console.error (err);
+        /*emitir un registro de error en errLog.txt*/
+        myEmitter.emit('log',`${err.name}: ${err.message}`,'errLog.txt');
         response.statusCode = 500;
         response.end();
     }
@@ -31,9 +42,10 @@ const serveFile =  async (filePath, contentType, response) => {
 
 const server = http.createServer(
     (serverRequest,serverResponse) => {
-        console.log (`${serverRequest.url}\t${serverRequest.method}`);
-        //imprime la direccion del servidor y el metodo usado
-
+        /*imprime en consola la direccion del servidor y el metodo usado
+        console.log (`${serverRequest.url}\t${serverRequest.method}`);*/
+        //registra los eventos en reqLog 
+        myEmitter.emit('log',`${serverRequest.url}\t${serverRequest.method}`,'reqLog.txt');
         //adquirir la extension del archivo para manipular el Content-Type y manipular correctamente los archivos
         const extension = path.extname(serverRequest.url);
         let contentType;
