@@ -1,3 +1,4 @@
+//1.48.41
 //dependencias nativas
 const fs = require ('fs');
 const path = require('path');
@@ -72,8 +73,22 @@ const server = http.createServer(
             serveFile(filePath, contentType, serverResponse);
         }
         else {
-            //301
-            //404
+            /*Redireccionamiento a una pagina nueva, al index o 404
+            el metodo .base es el nombre del archivo*/
+            switch(path.parse(filePath).base){
+            //301 redirect
+            case 'old-page.html':
+                res.writeHead(301,{'Location':'/new-page.html'}); 
+                res.end();
+                break;
+            case 'www-page.html':
+                res.writeHead(301,{"Location":'/'});
+                res.end();
+                break;
+            default:
+                //al entregar una respuesta 404
+                serveFile(path.join(__dirname,'views','404.html'), 'text/html', res);
+            }
         }
     }
 );
