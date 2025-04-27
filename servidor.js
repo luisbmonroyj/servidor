@@ -78,16 +78,16 @@ const server = http.createServer(
             switch(path.parse(filePath).base){
             //301 redirect
             case 'old-page.html':
-                res.writeHead(301,{'Location':'/new-page.html'}); 
-                res.end();
+                serverResponse.writeHead(301,{'Location':'/new-page.html'}); 
+                serverResponse.end();
                 break;
             case 'www-page.html':
-                res.writeHead(301,{"Location":'/'});
-                res.end();
+                serverResponse.writeHead(301,{"Location":'/'});
+                serverResponse.end();
                 break;
             default:
                 //al entregar una respuesta 404
-                serveFile(path.join(__dirname,'views','404.html'), 'text/html', res);
+                serveFile(path.join(__dirname,'views','404.html'), 'text/html', serverResponse);
             }
             /*las pruebas de esta rutina se hacen creando los archivos:
             new-page.html
