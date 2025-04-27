@@ -61,6 +61,20 @@ Estas dependencias descargaran unos archivos en la carpeta del proyecto (node_mo
 
 www.npmjs.com 
 
+## cambios en package.json
+
+la entrada scripts se cambio por:
+        
+        "scripts": {
+        "start": "node servidor",
+        "dev": "nodemon servidor"
+        }
+
+para poder hacer la
+## Prueba del servidor en desarrollo
+
+        npm run dev
+
 
 
 

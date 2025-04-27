@@ -5,8 +5,7 @@
   "main": "servidor.js",
   "scripts": {
     "start": "node servidor",
-    "dev": "nodemon servidor",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon servidor"
   },
   "author": "LuisBMonroyJ",
   "license": "ISC",
